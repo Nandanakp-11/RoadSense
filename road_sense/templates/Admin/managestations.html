@@ -1,0 +1,40 @@
+{% extends 'Admin/Adminindexhome.html' %}
+{% block body %}
+<body>
+<form action="/myapp/search_Ev/#hello"method="post">
+   {% csrf_token %}
+    <table class="table table-bordered">
+   <tr>
+       <td><input type="text"name="search"class="form-control"></td>
+       <td><input type="submit"value="Search"class="btn btn-info" ></td>
+   </tr>
+</table>
+    <table class="table table-bordered">
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>Sl.no</th>
+            <th>Station name </th>
+            <th>Email</th>
+            <th>Lisence no.</th>
+            <th>phone</th>
+            <th>Address</th>
+            <th>status</th>
+        </tr></thead>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.stationname }}</td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.licenseno }}</td>
+            <td>{{ i.phone }}</td>
+            <td>{{ i.place }}<br>{{ i.district }}<br>{{ i.state }}<br>{{ i.pincode }}</td>
+            <td>{{ i.status }}</td>
+            <td><a href="/myapp/Approve_ev_statn/{{ i.LOGIN.id }}#hello"class="btn btn-success">Approve</a> </td>
+            <td><a href="/myapp/Reject_ev_statn/{{ i.id }}#hello" class="btn btn-danger">Reject</a> </td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+</body>
+{% endblock %}

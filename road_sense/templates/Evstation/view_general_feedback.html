@@ -1,0 +1,32 @@
+{% extends 'EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/Evapp/Search_general_feed/"method="post">
+{% csrf_token %}
+    <table class="table table-bordered">
+        <tr>
+            <th>From</th>
+            <td><input type="date"name="from"class="form-control"></td>
+            <th>To</th>
+            <td><input type="date"name="to"class="form-control"></td>
+            <td><input type="submit"value="Search"class="btn btn-info"></td>
+        </tr>
+    </table>
+    <table class="table table-bordered">
+        <thead><tr style="background-color: lightblue">
+            <th>Sl.no</th>
+            <th>Feedback</th>
+            <th>date</th>
+
+        </tr></thead>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.feedback }}</td>
+            <td>{{ i.date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

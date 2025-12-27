@@ -1,0 +1,49 @@
+{% extends 'Evstation/EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/ev_view_payment_post/"method="post">
+{% csrf_token %}
+    <table class="px pull-left">
+        <tr>
+            <th>From</th>
+            <td><input type="date"name="from"class="form-control"></td>
+            <th>To</th>
+            <td><input type="date"name="to"class="form-control"></td>
+            <td><input type="submit"value="Search"class="btn btn-info"></td>
+        </tr>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+        <tr style="background-color: lightblue">
+            <th>Sl.No</th>
+            <th>Date</th>
+            <th>Charging point outlet type</th>
+            <th>Charging point speed</th>
+            <th>Slot Date</th>
+{#            <th>Charging point price</th>#}
+            <th>User name</th>
+            <th>User contact</th>
+            <th>Amount</th>
+{#            <th>Status</th>#}
+
+        </tr>
+                </thead>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.date }}</td>
+            <td>{{ i.SLOTBOOKING.SLOTS.CHARGINGPOINT.outlettype }}</td>
+            <td>{{ i.SLOTBOOKING.SLOTS.CHARGINGPOINT.speed }}</td>
+            <td>{{ i.SLOTBOOKING.SLOTS.date }}</td>
+            <td>{{ i.SLOTBOOKING.USER.uname}}</td>
+            <td>{{ i.SLOTBOOKING.USER.phone }}<br>{{ i.SLOTBOOKING.USER.email }}</td>
+            <td>{{ i.SLOTBOOKING.SLOTS.CHARGINGPOINT.Price }}</td>
+            <td>{{ i.amount }}</td>
+{#            <td>{{ i.status }}</td>#}
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

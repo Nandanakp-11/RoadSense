@@ -1,0 +1,17 @@
+{% extends 'Admin/Adminindexhome.html' %}
+{% block body %}
+<body>
+<form action="/myapp/send_usr_rply_post/#hello"method="post">
+    {% csrf_token %}
+    <input type="hidden" value="{{ data.id }}"name="did">
+    <table class="table table-bordered">
+        <tr><th>Reply:</th><td><textarea name="reply"class="form-control" required></textarea></td></tr>
+        <tr>
+            <td align="center"colspan="2">
+                <input type="submit"value="Reply"class="btn btn-success">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+{% endblock %}

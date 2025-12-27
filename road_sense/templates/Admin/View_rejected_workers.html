@@ -1,0 +1,49 @@
+{% extends 'Admin/Adminindexhome.html' %}
+{% block body %}
+<body>
+<form action="/myapp/Search_Rjctd_workers/#hello"method="post">
+{% csrf_token %}
+    <table class="pull-left">
+   <tr>
+       <td><input type="text"name="search" placeholder="search by name" class="form-control"required></td>
+       <td><input type="submit"value="Search"class="btn btn-info" ></td>
+   </tr>
+</table>
+<br>
+<br>
+    <table class="table table-bordered" >
+    <thead>
+        <tr style="background-color: lightblue">
+            <th>Sl.no</th>
+            <th>workername nd photo</th>
+            <th>Email</th>
+            <th>Gender<br>
+            Dob<br>
+            Phone</th>
+            <th>Address</th>
+            <th>Experience</th>
+            <th>Qualification</th>
+            <th>Certificate</th>
+{#            <th>status</th>#}
+        </tr></thead>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td><img src="{{ i.photo }}" height="100px" width="100px"><br>{{ i.wname }} </td>
+            <td>{{ i.email }}</td>
+            <td>{{ i.gender }}
+            <br>{{ i.dob }}
+            <br>{{ i.phone }}</br>
+            <td>{{ i.place }}<br>{{ i.district }}<br>{{ i.state }}<br>{{ i.pincode }}</td>
+            <td>{{ i.experience }}</td>
+            <td>{{ i.qualification }}</td>
+            <td><a href="{{ i.certificate }}" class="btn btn-warning">Download</a> </td>
+{#            <td>{{ i.status }}</td>#}
+
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+
+</body>
+{% endblock %}

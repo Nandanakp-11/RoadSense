@@ -1,0 +1,29 @@
+{% extends 'Evstation/EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/Edit_slot_post/"method="post">
+{% csrf_token %}
+    <table class="table table-bordered">
+    <input type="hidden"name="id1"value="{{ data.id }}">
+        <tr><th>Charging Point:</th>
+        <td><select name="charge" class="form-control"required>
+            {% for i in data1 %}
+            <option {% if data.CHARGINGPOINT.id == i.id %}selected{% endif %} value="{{ i.id }}">{{ i.outlettype }}-{{ i.speed }}</option>
+            {% endfor %}
+        </select></td></tr>
+<tr>
+    <th>date</th>
+    <td><input type="date" name="date" min="{{ dat |date:'Y-m-d' }}"  value="{{ data.date |date:'Y-m-d' }}" class="form-control" required></td>
+</tr>
+    <tr>
+        <td>Total Slot</td>
+        <td><input type="text" name="slots" value="{{ data.slots }}" required class="form-control"> </td>
+    </tr>
+        <tr>
+            <td colspan="2"align="center"><input type="submit"value="Update"class="btn btn-info"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+{% endblock %}

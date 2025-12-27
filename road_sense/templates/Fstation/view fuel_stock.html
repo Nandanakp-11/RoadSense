@@ -1,0 +1,46 @@
+{% extends 'Fstation/Homeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/Search_slots/"method="post">
+{% csrf_token %}
+    <table class="px pull-left">
+        <tr>
+{#            <th>From</th>#}
+            <td><input type="text" placeholder="Search here..." name="from" required class="form-control"></td>
+{#        <th>To</th><td><input type="date"name="to"class="form-control"></td>#}
+        <td><input type="submit" value="Search" class="btn btn-info"></td></tr>
+    </table>
+    <table class="table table-bordered">
+<thead>
+<tr style="background-color: lightblue">
+    <th>Slot.No</th>
+        <th>Fuel Type</th>
+    <th>Brand </th>
+    <th>Quantity</th>
+     <th>Price</th>
+    <th>Stock</th>
+    <td></td>
+    <td></td>
+</tr>
+</thead>
+{% for i in data %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+        <td>{{ i.fuel_type }}</td>
+
+    <td>{{ i.brand }}</td>
+    <td>{{ i.quantity }}</td>
+    <td>{{ i.price }}</td>
+    <td>{{ i.stock }}</td>
+
+{#    <td><a href="/myapp/edit_slot/{{ i.id }}#hello" class="btn btn-warning">Edit</a> </td>#}
+    <td><a href="/myapp/fs_delete_stock/{{ i.id }}" onclick="return confirm('Are You Sure?')" class="btn btn-danger">Delete</a> </td>
+         <td><a href="/myapp/ev_view_booking/{{ i.id }}#hello" class="btn btn-success">Booking</a> </td>
+
+
+</tr>
+{% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

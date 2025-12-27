@@ -1,0 +1,154 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+-->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <title></title>
+		<!-- Meta tags -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.6.1.js"
+        integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+		<!-- //Meta tags -->
+    <link rel="stylesheet" href="/static/signup/css/style.css" type="text/css" media="all" /><!-- Style-CSS -->
+    <link href="/static/signup/css/font-awesome.css" rel="stylesheet"><!-- font-awesome-icons -->
+</head>
+
+<body>
+	<section class="w3l-form-36">
+		<div class="form-36-mian section-gap">
+			<div class="wrapper">
+				<div class="form-inner-cont">
+					<h3>Create your account</h3>
+					<form action="/myapp/sigin_post_ev/" method="post" class="signin-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+						<div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="evstn" placeholder="enter your Station Name" pattern="[A-Z a-z]*" required />
+						</div>
+						<div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="licno" placeholder="enter your License No"
+								required />
+						</div>
+
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="place" placeholder="enter your Place"
+							pattern="[A-Z a-z]+"	required />
+						</div><div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="district" placeholder="enter your district"
+							pattern="[A-Za-z]+"	required />
+						</div>
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="state" placeholder="enter your State"
+								required />
+						</div>
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span><input type="text" name="pincode" placeholder="enter your pin code"
+								  pattern="[0-9]{6}" required />
+						</div>
+
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="email"  id="emailid" name="mail" placeholder="enter your email"
+								required />
+
+						</div>
+                        <span id="email_error"></span>
+
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="phone" placeholder="enter your phone"
+							pattern="[6789][0-9]{9}"	required />
+						</div>
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="latitude" placeholder="Latitude"
+								required />
+						</div>
+                        <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="text" name="longitude" placeholder="Longitude"
+								required />
+						</div>
+                         <div class="form-input">
+							<span class="" aria-hidden="true"></span> <input type="password" name="passwd" placeholder=" Password"
+								required />
+						</div>
+
+
+
+
+
+
+
+
+
+
+						<div class="login-remember d-grid">
+
+							<button class="btn theme-button" id="btn">Signup</button>
+						</div>
+					</form>
+
+
+					<p class="signup">Already a member? <a href="/Evapp/login/ " class="signuplink">Login</a></p>
+
+
+				</div>
+                </div>
+
+				<!-- copyright -->
+
+			</div>
+		</div>
+	</section>
+ <script src="/static/js/jquery.min.js"></script>
+    <script>
+         $('#emailid').change(function () {
+    $.ajaxSetup({
+                headers: {
+                    "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+                }
+            })
+    $.ajax({
+        'url':'/tvshow_app/email_ex/',
+        'type':'post',
+
+        'data':{
+            email:$(this).val()
+        },
+        success:function (response) {
+            var email_error = $('#email_error')
+
+            var k=response;
+            if(k['status']=="ok"){
+                $('#email_error').html('email already exist').css('color','red');
+                $('#btn').hide()
+            }
+            else{
+                $('#btn').show()
+                $('#email_error').hide()
+
+            }
+
+        }
+    })
+})
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

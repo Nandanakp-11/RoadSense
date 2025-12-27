@@ -1,0 +1,45 @@
+{% extends 'Evstation/EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/Search_slots/"method="post">
+{% csrf_token %}
+    <table class="px pull-left">
+        <tr><th>From</th><td><input type="date"name="from"class="form-control"></td>
+        <th>To</th><td><input type="date"name="to"class="form-control"></td>
+        <td><input type="submit"value="Search"class="btn btn-info"></td></tr>
+    </table>
+    <table class="table table-bordered">
+<thead>
+<tr style="background-color: lightblue">
+    <th>Slot.No</th>
+        <th>Date</th>
+    <th>Charging Point</th>
+    <th>Slot</th>
+     <td></td>
+    <td></td>
+    <td></td>
+</tr>
+</thead>
+{% for i in data %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+        <td>{{ i.date }}</td>
+
+    <td>{{ i.CHARGINGPOINT.outlettype }} - {{ i.CHARGINGPOINT.speed }}</td>
+    <td>{{ i.slots }}
+{#    <br>{{ i.EVSTATIONS.district }}<br>#}
+{#    {{ i.EVSTATIONS.state }}<br>#}
+{#        {{ i.EVSTATIONS.pincode }}#}
+    </td>
+
+    <td><a href="/myapp/edit_slot/{{ i.id }}#hello" class="btn btn-warning">Edit</a> </td>
+    <td><a href="/myapp/delete_slot/{{ i.id }}" onclick="return confirm('Are You Sure?')" class="btn btn-danger">Delete</a> </td>
+         <td><a href="/myapp/ev_view_booking/{{ i.id }}#hello" class="btn btn-success">Booking</a> </td>
+
+
+</tr>
+{% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

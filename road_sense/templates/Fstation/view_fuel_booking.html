@@ -1,0 +1,66 @@
+{% extends 'Fstation/Homeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/ev_view_booking_post/"method="post">
+{% csrf_token %}
+    <table class="px pull-left">
+        <tr>
+            <th>From</th>
+            <td><input type="date"name="from"class="form-control"></td>
+            <th>To</th>
+            <td><input type="date"name="to" class="form-control"></td>
+            <td><input type="submit"value="Search"class="btn btn-info"></td>
+        </tr>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+        <tr style="background-color: lightblue">
+            <th>Sl.No</th>
+{#            <th>Station name</th>#}
+{#            <th>place</th>#}
+{#            <th>Slot_id</th>#}
+            <th>date</th>
+
+{#            <th>date</th>#}
+              <th>Fuel Type</th>
+            <th>Brand</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>User_name</th>
+                        <th>User_contact</th>
+
+{#            <th>Amount</th>#}
+
+
+        </tr>
+                </thead>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+{#            <td>{{ i.SLOTS.EVSTATIONS.stationname }}</td>#}
+{#<td>{{ i.SLOTS.EVSTATIONS.place }}#}
+{#    <br>{{ i.SLOTS.EVSTATIONS.district }}<br>#}
+{#    {{ i.SLOTS.EVSTATIONS.state }}<br>#}
+{#        {{ i.SLOTS.EVSTATIONS.pincode }}#}
+{#    </td>#}
+{#            <td>{{ i.SLOTS.id }}</td>#}
+            <td>{{ i.date }}</td>
+            <td>{{ i.fuel_type }}</td>
+            <td>{{ i.brand }}</td>
+            <td>{{ i.quantity }}</td>
+            <td>{{ i.price }}</td>
+            <td>{{ i.uname }}</td>
+            <td>{{ i.email }}<br>{{ i.phone }}</td>
+            <td><a href="https://www.google.com/maps?q={{ i.lat }},{{ i.longi }}" target="_blank" class="btn btn-warning">Map</a> </td>
+
+{#            <td>{{ i.amount }}</td>#}
+
+{#         <td><a href="/Evapp/approve_slots/{{ i.id }}"class="btn btn-success">Approve</a> </td>#}
+{#            <td><a href="/Evapp/reject_slots/{{ i.id }}" class="btn btn-danger">Reject</a> </td>#}
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}

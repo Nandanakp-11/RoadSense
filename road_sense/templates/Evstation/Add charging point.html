@@ -1,0 +1,31 @@
+{% extends 'Evstation/EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/add_charging_point_post/#hello"method="post">
+{% csrf_token %}
+    <table class="table table-bordered">
+        <tr><th>Speed:</th>
+        <td><input type="text" name="speed" class="form-control" required>
+
+        </td></tr>
+
+        <tr><th>Outlet Type:</th>
+        <td><input type="text" name="type" class="form-control" required>
+
+        </td></tr>
+        <tr><th>Number of outlets:</th>
+        <td><input type="number" min="1" name="outlet" class="form-control" required>
+
+        </td></tr>
+<tr>
+    <th>Price</th>
+    <td><input type="text"name="price" pattern="[0-9]{1,}" placeholder="Cost per kWh or per session." class="form-control"required></td>
+</tr>
+        <tr>
+            <td colspan="2"align="center"><input type="submit"value="Add" class="btn btn-info"></td>
+        </tr>
+
+    </table>
+</form>
+</body>
+{% endblock %}

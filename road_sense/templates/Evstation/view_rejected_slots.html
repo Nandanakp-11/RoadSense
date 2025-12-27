@@ -1,0 +1,50 @@
+{% extends 'Evstation/EvstationHomeindex.html' %}
+{% block body %}
+<body>
+<form action="/myapp/Rejected_slot_search/"method="post">
+{% csrf_token %}
+    <table class="table table-bordered">
+        <tr>
+            <th>From</th>
+            <td><input type="date"name="from" class="form-control"></td>
+            <th>To</th>
+            <td><input type="date"name="to"class="form-control"></td>
+            <td><input type="submit"value="Search"class="btn btn-info"></td>
+        </tr>
+    </table>
+    <table class="table table-bordered">
+        <thead>
+        <tr style="background-color: lightblue">
+            <th>Sl.No</th>
+            <th>Station name</th>
+            <th>place</th>
+            <th>Slot_id</th>
+            <th>date</th>
+            <th>User_id</th>
+            <th>User_name</th>
+            <th>Amount</th>
+            <th>Status</th>
+
+        </tr>
+                </thead>
+
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.SLOTS.EVSTATIONS.stationname }}</td>
+            <td>{{ i.SLOTS.EVSTATIONS.place }}
+    <br>{{ i.SLOTS.EVSTATIONS.district }}<br>
+    {{ i.SLOTS.EVSTATIONS.state }}<br>
+        {{ i.SLOTS.EVSTATIONS.pincode }}</td>
+            <td>{{ i.SLOTS.id }}</td>
+            <td>{{ i.SLOTS.date}}</td>
+            <td>{{ i.USER.id }}</td>
+            <td>{{ i.USER.uname }}</td>
+            <td>{{ i.amount }}</td>
+            <td>{{ i.status }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</body>
+{% endblock %}
